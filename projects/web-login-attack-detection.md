@@ -26,8 +26,9 @@ to identify the root cause of the compromise.
 ## 4. Investigation Timeline
 
 ### Step 1: Reconnaissance Phase
-The investigation began by searching for the domain that the website has changed to imreallynotbatman.com
-so to investigate and reconnaissance we do a search in the index file as shown in the 
+
+The investigation commenced with a targeted search for the domain imreallynotbatman.com, which the defaced website had been redirected to.
+This step was conducted to identify related log entries within the index and to gather initial evidence for reconnaissance and root cause analysis.
 
 ![Defacing_Reconnaissance](images/Defacing_Reconnaissance.png)
 
