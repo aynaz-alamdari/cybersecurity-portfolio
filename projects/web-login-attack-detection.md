@@ -26,7 +26,8 @@ to identify the root cause of the compromise.
 ## 4. Investigation Timeline
 
 ### Step 1: Reconnaissance Phase
-The investigation began by searching for the domain that the website has changed to 
+The investigation began by searching for the domain that the website has changed to imreallynotbatman.com
+so to investigate and reconnaissance we do a search in the index file as shown in the 
 
 
 
