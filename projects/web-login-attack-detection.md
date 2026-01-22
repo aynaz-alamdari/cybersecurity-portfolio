@@ -36,4 +36,8 @@ The investigation began by searching for the domain **imreallynotbatman.com**, w
 
 ![Defacing_Reconnaissance](images/Defacing_Reconnaissance.png)
 
+### Step 2: Identify reconnaissance source IP
+The next step was to identify the source IP address responsible for reconnaissance activity against the web server.
+
+![Identify_reconnaissance_source_IP](images/Identify_reconnaissance_source_IP.png)
 
