@@ -1,9 +1,9 @@
+# Website Defacement – Root Cause Analysis
+
 ## Lab Context
 
 This project is based on a simulated incident scenario and log data provided by the TryHackMe platform.  
 All activity, IP addresses, and infrastructure are part of a controlled lab environment used for educational purposes.
-
-# Website Defacement – Root Cause Analysis
 
 ## 1. Incident Summary
 A public-facing website was reported as defaced, displaying unauthorized content.
