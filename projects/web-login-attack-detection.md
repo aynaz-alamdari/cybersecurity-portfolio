@@ -30,6 +30,6 @@ The investigation began by searching for the domain that the website has changed
 so to investigate and reconnaissance we do a search in the index file as shown in the 
 ../images/Defacing_Reconnaissance.png
 
-![Description](../images/Defacing_Reconnaissance.png)
+![Description](/images/Defacing_Reconnaissance.png)
 
 
