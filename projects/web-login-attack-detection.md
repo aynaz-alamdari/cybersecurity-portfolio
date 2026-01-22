@@ -41,3 +41,6 @@ The next step was to identify the source IP address responsible for reconnaissan
 
 ![Identify_reconnaissance_source_IP](images/Identify_reconnaissance_source_IP.png)
 
+The source IP address was validated through analysis of Suricata-generated IDS/IPS alerts, confirming reconnaissance-related activity.
+
+
