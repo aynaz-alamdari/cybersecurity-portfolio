@@ -36,7 +36,6 @@ The investigation began by searching for the domain **imreallynotbatman.com**, w
 
 ![Defacing_Reconnaissance](images/Defacing_Reconnaissance.png)
 
-### Step 2: Identify reconnaissance source IP
 The next step was to identify the source IP address responsible for reconnaissance activity against the web server.
 
 ![Identify_reconnaissance_source_IP](images/Identify_reconnaissance_source_IP.png)
@@ -45,4 +44,10 @@ The source IP address was validated through analysis of Suricata-generated IDS/I
 index="botsv1" sourcetype=suricata imreallynotbatman src_ip="40.80.148.xx"
 
 ![Validate_IP_By_Suricata](images/Validate_IP_By_Suricata.png)
+
+### Step 2: Exploitation Phase: Analyze potential exploitation attempts
+The investigation focused on analyzing potential exploitation attempts against the web server to determine whether the attacker was successful.
+
+First we want to see the number of occurrences for each source IP address with this query: 
+
 
