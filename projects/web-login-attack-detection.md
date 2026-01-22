@@ -49,5 +49,7 @@ index="botsv1" sourcetype=suricata imreallynotbatman src_ip="40.80.148.xx"
 The investigation focused on analyzing potential exploitation attempts against the web server to determine whether the attacker was successful.
 
 First we want to see the number of occurrences for each source IP address with this query: 
+![Validate_IP_By_Suricata](images/Search_Query_Number_of_ip_Addresses.png)
+
 
 
