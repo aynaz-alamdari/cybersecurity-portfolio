@@ -28,6 +28,7 @@ to identify the root cause of the compromise.
 ### Step 1: Reconnaissance Phase
 The investigation began by searching for the domain that the website has changed to imreallynotbatman.com
 so to investigate and reconnaissance we do a search in the index file as shown in the 
+../images/Defacing_Reconnaissance.png
 
 
 
