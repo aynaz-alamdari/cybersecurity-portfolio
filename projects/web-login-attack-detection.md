@@ -55,4 +55,7 @@ Then this query was executed to enumerate source IP addresses associated with in
 ![IP_Http_Traffic_To_Webserver.png](images/IP_Http_Traffic_To_Webserver.png)
 
 The http_method field provides information about the HTTP methods observed during these communications.
+![Http_Methods_For_Webserver.png](images/Http_Methods_For_Webserver.png)
+
+
 
