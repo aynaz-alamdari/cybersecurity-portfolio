@@ -51,6 +51,6 @@ The investigation focused on analyzing potential exploitation attempts against t
 First we want to see the number of occurrences for each source IP address with this query: 
 ![Search_Query_Number_of_ip_Addresses](images/Search_Query_Number_of_ip_Addresses.png)
 
-Then 
-
+Then this query was executed to enumerate source IP addresses associated with inbound HTTP traffic to the web server.
+![Search_Query_Number_of_ip_Addresses](images/Search_Query_Number_of_ip_Addresses.png)
 
