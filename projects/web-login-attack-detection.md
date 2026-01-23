@@ -52,5 +52,5 @@ First we want to see the number of occurrences for each source IP address with t
 ![Search_Query_Number_of_ip_Addresses](images/Search_Query_Number_of_ip_Addresses.png)
 
 Then this query was executed to enumerate source IP addresses associated with inbound HTTP traffic to the web server.
-![Search_Query_Number_of_ip_Addresses](images/Search_Query_Number_of_ip_Addresses.png)
+![IP_Http_Traffic_To_Webserver.png](images/IP_Http_Traffic_To_Webserver.png)
 
