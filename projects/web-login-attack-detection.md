@@ -61,3 +61,7 @@ The src_ip results reveal that POST request activity was exclusively generated b
 The following query was used to support this analysis: 
 index=botsv1 sourcetype=stream:http dest_ip="192.168.250.xx" http_method=POST
 
+The presence of Joomla in multiple web server fields indicates that the backend web application is running the Joomla CMS. The default Joomla administrative login page is located at /joomla/administrator/index.php, which provides access to the web portal’s admin interface. Traffic targeting this endpoint was analyzed to identify potential malicious activity, including possible brute‑force login attempts.
+Based on the identification of the Joomla CMS and its administrative login page (`/joomla/administrator/index.php`), the investigation was scoped to examine only requests targeting this endpoint. The following search query was used to filter relevant traffic and identify potential malicious activity.
+![Joomla_BruteForce.png](images/Joomla_BruteForce.png)
+
