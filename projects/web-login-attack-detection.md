@@ -65,3 +65,4 @@ The presence of Joomla in multiple web server fields indicates that the backend 
 Based on the identification of the Joomla CMS and its administrative login page (`/joomla/administrator/index.php`), the investigation was scoped to examine only requests targeting this endpoint. The following search query was used to filter relevant traffic and identify potential malicious activity.
 ![Joomla_BruteForce.png](images/Joomla_BruteForce.png)
 
+The query results indicate that the attacker from IP `23.22.63.114` attempted a brute-force attack, repeatedly trying different passwords to gain access to the administrative login.
