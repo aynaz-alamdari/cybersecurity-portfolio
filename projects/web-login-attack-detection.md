@@ -66,3 +66,7 @@ Based on the identification of the Joomla CMS and its administrative login page 
 ![Joomla_BruteForce.png](images/Joomla_BruteForce.png)
 
 The query results indicate that the attacker from IP `23.22.63.114` attempted a brute-force attack, repeatedly trying different passwords to gain access to the administrative login.
+
+After running several search queries, the results indicated a sustained brute-force attack originating from IP 23.22.63.114, along with a single password attempt using “batman” from IP 40.80.148.42 via a Mozilla browser.
+
+
