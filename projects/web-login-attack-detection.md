@@ -76,3 +76,7 @@ The investigation revealed that iamreallynotbatman.com was compromised via a bru
 The investigation identified an .exe file present on the server, which was traced back to one of the malicious IP addresses discovered during the previous phase.
 ![ExeFile_Source.png](images/ExeFile_Source.png)
 
+To verify if the file was executed on the server, we examined host-centric log sources for evidence of execution activity. After analyzing the search queries, we have determined that the file 3791.exe was executed on the server.
+
+
+
