@@ -74,4 +74,5 @@ After running several search queries, the results indicated a sustained brute-fo
 The investigation revealed that iamreallynotbatman.com was compromised via a brute-force attack conducted with an automated Python script. Two separate IP addresses were involved, one used to carry out the password-guessing attack and another to access the server after successful authentication. This phase examines the server for any malicious files or payloads that may have been uploaded following the compromise.
 
 The investigation identified an .exe file present on the server, which was traced back to one of the malicious IP addresses discovered during the previous phase.
+![ExeFile_Source.png](images/ExeFile_Source.png)
 
