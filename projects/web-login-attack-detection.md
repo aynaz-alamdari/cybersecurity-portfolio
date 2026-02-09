@@ -69,4 +69,9 @@ The query results indicate that the attacker from IP `23.22.63.114` attempted a 
 
 After running several search queries, the results indicated a sustained brute-force attack originating from IP 23.22.63.114, along with a single password attempt using “batman” from IP 40.80.148.42 via a Mozilla browser.
 
+### Step 3: Installation Phase
+
+The investigation revealed that iamreallynotbatman.com was compromised via a brute-force attack conducted with an automated Python script. Two separate IP addresses were involved, one used to carry out the password-guessing attack and another to access the server after successful authentication. This phase examines the server for any malicious files or payloads that may have been uploaded following the compromise.
+
+The investigation identified an .exe file present on the server, which was traced back to one of the malicious IP addresses discovered during the previous phase.
 
