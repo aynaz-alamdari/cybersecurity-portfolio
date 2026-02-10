@@ -101,5 +101,14 @@ index=botsv1 url="/poisonivy-is-coming-for-you-batman.jpeg" dest_ip="192.168.250
 
 
 This search provided visibility into the source of the request and the associated hostname, allowing the file’s origin and delivery path to be traced. The results indicate that the image file was externally sourced and likely related to the website defacement activity.
+
 ![MaliciousPicture.png](images/MaliciousPicture.png)
+
+Before defacing the website, the attacker uploaded a malicious file to the server. During this process, the attacker used a Dynamic DNS service to mask the true source of the attack. Instead of communicating directly with a fixed IP address, the server resolved a domain name controlled by the attacker, which dynamically pointed to different IP addresses.
+
+The objective of this step in the investigation was to identify the actual IP address that the malicious domain resolved to at the time of the attack. By analyzing DNS-related network traffic, it is possible to determine which IP address the attacker’s Dynamic DNS domain pointed to when the file was uploaded, helping to uncover the true origin of the malicious activity.
+
+![DynamicDNS.png](images/DynamicDNS.png)
+
+
 
