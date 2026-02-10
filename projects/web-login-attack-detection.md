@@ -106,9 +106,8 @@ This search provided visibility into the source of the request and the associate
 
 Before defacing the website, the attacker uploaded a malicious file to the server. During this process, the attacker used a Dynamic DNS service to mask the true source of the attack. Instead of communicating directly with a fixed IP address, the server resolved a domain name controlled by the attacker, which dynamically pointed to different IP addresses.
 
+### Step 4: Weaponization Phase
 The objective of this step in the investigation was to identify the actual IP address that the malicious domain resolved to at the time of the attack. By analyzing DNS-related network traffic, it is possible to determine which IP address the attacker’s Dynamic DNS domain pointed to when the file was uploaded, helping to uncover the true origin of the malicious activity.
 
 ![DynamicDNS.png](images/DynamicDNS.png)
-
-
 
