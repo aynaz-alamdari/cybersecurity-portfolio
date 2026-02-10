@@ -101,4 +101,5 @@ index=botsv1 url="/poisonivy-is-coming-for-you-batman.jpeg" dest_ip="192.168.250
 
 
 This search provided visibility into the source of the request and the associated hostname, allowing the file’s origin and delivery path to be traced. The results indicate that the image file was externally sourced and likely related to the website defacement activity.
+![MaliciousPicture.png](images/MaliciousPicture.png)
 
