@@ -78,5 +78,27 @@ The investigation identified an .exe file present on the server, which was trace
 
 To verify if the file was executed on the server, we examined host-centric log sources for evidence of execution activity. After analyzing the search queries, we have determined that the file 3791.exe was executed on the server.
 
+To identify the file responsible for the website defacement, Suricata network logs were analyzed to trace any suspicious traffic associated with the compromised server. The investigation began by examining Suricata as the primary log source to identify potential external communications.
 
+Initially, no suspicious inbound connections from external IP addresses were observed. As a result, attention was shifted to outbound traffic originating from the server. Since the server is not expected to initiate outbound connections under normal conditions, any such traffic was treated as potentially malicious.
+
+The following search query was used to identify outbound Suricata events from the server:
+
+index=botsv1 src=192.168.250.70 sourcetype=suricata
+
+
+This query revealed two suspicious destination IP addresses. Each IP address was then investigated individually. One of the suspicious destinations identified was 23.22.63.114, which was analyzed using the following query:
+
+index=botsv1 src=192.168.250.70 sourcetype=suricata dest_ip=23.22.63.114
+
+
+While reviewing the events related to this IP address, a suspicious image file was observed in the url field. To determine how this file was delivered to the server and whether it was involved in the defacement, additional searches were performed.
+
+The following query was used to identify traffic where the server was the destination and the suspicious file was requested:
+
+index=botsv1 url="/poisonivy-is-coming-for-you-batman.jpeg" dest_ip="192.168.250.70"
+| table _time src dest_ip http.hostname url
+
+
+This search provided visibility into the source of the request and the associated hostname, allowing the file’s origin and delivery path to be traced. The results indicate that the image file was externally sourced and likely related to the website defacement activity.
 
