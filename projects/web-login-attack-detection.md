@@ -163,3 +163,79 @@ Before defacing the website, the attacker uploaded a malicious file using a Dyna
 - Documented all relevant IOCs for potential remediation and future monitoring.
 
 After authentication, the attacker uploaded and executed a malicious payload, communicated with external infrastructure using Dynamic DNS, and ultimately defaced the website.
+
+## Conclusion
+
+In this lab exercise, as a SOC Analyst, we investigated a cyber-attack in which the attacker defaced the website **`imreallynotbatman.com`** of Wayne Enterprises. The attacker’s activities were mapped to the **7 phases of the Cyber Kill Chain**. Below is a recap of the key findings from each phase:
+
+---
+
+### Reconnaissance Phase
+
+**Objective:** Identify the attacker’s initial scanning and information-gathering activity.
+
+**Findings:**
+
+- IP `40.80.148.42` was scanning the web server.  
+- The attacker used **Acunetix** as a web scanner.
+
+---
+
+### Exploitation Phase
+
+**Objective:** Analyze attempts to exploit the server and gain access.
+
+**Findings:**
+
+- Brute-force attacks originated from IP `23.22.63.114`.  
+- Access was ultimately achieved via IP `40.80.148.42`.  
+- **142 brute-force attempts** were made, with **one successful login**.
+
+---
+
+### Installation Phase
+
+**Objective:** Determine if the attacker uploaded any malicious files after gaining access.
+
+**Findings:**
+
+- Malicious executable **`3791.exe`** was uploaded by the attacker.  
+- Sysmon logs confirmed the MD5 hash of the file.
+
+---
+
+### Action on Objective
+
+**Objective:** Identify the outcome of the attacker’s compromise.
+
+**Findings:**
+
+- The attacker defaced the web server.  
+- Logs revealed the file responsible for the defacement.
+
+---
+
+### Weaponization Phase
+
+**Objective:** Investigate the attacker’s infrastructure and supporting tools.
+
+**Information Available:**
+
+- Domain: `prankglassinebracket.jumpingcrab.com`  
+- IP Address: `23.22.63.114`  
+
+**Findings:**
+
+- Multiple masquerading domains were associated with the attacker’s IPs.  
+- Email **`Lillian.rose@po1s0n1vy.com`** was linked to the attacker’s infrastructure.
+
+---
+
+### Delivery Phase
+
+**Objective:** Identify additional malware and secondary attack vectors used by the adversary.
+
+**Findings:**
+
+- Malware **`MirandaTateScreensaver.scr.exe`** was associated with the attacker.  
+- MD5 hash of the malware: `c99131e0169171935c5ac32615ed6261`.
