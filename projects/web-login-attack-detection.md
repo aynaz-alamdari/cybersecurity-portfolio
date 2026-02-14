@@ -42,7 +42,8 @@ The next step was to identify the source IP address responsible for reconnaissan
 
 The source IP address was validated through analysis of Suricata-generated IDS/IPS alerts, confirming reconnaissance-related activity.
 ```spl 
-index="botsv1" sourcetype=suricata imreallynotbatman src_ip="40.80.148.xx" ```
+index="botsv1" sourcetype=suricata imreallynotbatman src_ip="40.80.148.xx" 
+```
 
 
 ![Validate_IP_By_Suricata](images/Validate_IP_By_Suricata.png)
