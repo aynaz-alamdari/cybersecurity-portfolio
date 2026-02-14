@@ -239,3 +239,11 @@ In this lab exercise, as a SOC Analyst, we investigated a cyber-attack in which 
 
 - Malware **`MirandaTateScreensaver.scr.exe`** was associated with the attacker.  
 - MD5 hash of the malware: `c99131e0169171935c5ac32615ed6261`.
+  
+## Remediation Recommendations
+
+- Enforce strong password policies and account lockout to prevent brute-force attacks.  
+- Keep Joomla CMS and all plugins up to date.  
+- Monitor outbound connections from web servers for unusual traffic.  
+- Implement web application firewalls (WAF) and IDS/IPS rules to block known malicious IPs.  
+- Perform regular malware scans and review file integrity.
