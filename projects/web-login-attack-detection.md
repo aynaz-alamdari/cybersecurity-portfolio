@@ -113,8 +113,103 @@ Before defacing the website, the attacker uploaded a malicious file to the serve
 - Checked the same IPs and domains in **VirusTotal** to identify any known malicious activity.
 - Documented findings to support further phases of incident handling.
 
-- 
 The objective of this step in the investigation was to identify the actual IP address that the malicious domain resolved to at the time of the attack. By analyzing DNS-related network traffic, it is possible to determine which IP address the attacker’s Dynamic DNS domain pointed to when the file was uploaded, helping to uncover the true origin of the malicious activity.
 
 ![DynamicDNS.png](images/DynamicDNS.png)
 
+### Step 5: Delivery Phase
+
+Using the intelligence gathered about the adversary, we conducted proactive threat hunting across multiple Threat Intelligence and OSINT platforms. By pivoting on known Indicators of Compromise (IOCs), such as IP addresses, domains, and file hashes, we identified malware samples and infrastructure linked to the threat actor.
+
+Overview
+
+In this investigation, I analyzed a simulated web defacement attack against imreallynotbatman.com and mapped the adversary’s activities across the Cyber Kill Chain framework. Using log analysis, Sysmon telemetry, and Threat Intelligence platforms, I reconstructed the attack lifecycle and identified the attacker’s infrastructure and associated malware.
+
+🔎 1. Reconnaissance
+
+I identified reconnaissance activity targeting the web server.
+
+Findings:
+
+IP 40.80.148.42 was actively scanning the server.
+
+The attacker used Acunetix to perform vulnerability scanning and enumeration.
+
+🚪 2. Exploitation
+
+I analyzed authentication logs and detected a brute-force attack.
+
+Findings:
+
+142 login attempts were made against the server.
+
+The attack originated from IP 23.22.63.114.
+
+IP 40.80.148.42 was used to successfully gain access.
+
+One authentication attempt resulted in compromise.
+
+📦 3. Installation
+
+I investigated post-compromise activity and identified payload deployment.
+
+Findings:
+
+Malicious executable 3791.exe was uploaded to the server.
+
+I analyzed Sysmon logs to retrieve the MD5 hash of the file.
+
+The hash was used to pivot across Threat Intelligence platforms.
+
+🎯 4. Action on Objectives
+
+After gaining access, the attacker defaced the website.
+
+Findings:
+
+Log analysis revealed the file used to modify and deface the web server content.
+
+🧩 5. Weaponization & Infrastructure Analysis
+
+I pivoted on identified Indicators of Compromise (IOCs) using multiple Threat Intelligence and OSINT platforms.
+
+Indicators Investigated:
+
+Domain: prankglassinebracket.jumpingcrab.com
+
+IP Address: 23.22.63.114
+
+Findings:
+
+Multiple masquerading domains were associated with the attacker’s infrastructure.
+
+The email Lillian.rose@po1s0n1vy.com
+ was linked to the adversary’s IP address.
+
+🚚 6. Delivery (Secondary Payload Discovery)
+
+I conducted further OSINT analysis and identified additional malware linked to the adversary.
+
+Findings:
+
+Malware identified: MirandaTateScreensaver.scr.exe
+
+MD5 Hash: c99131e0169171935c5ac32615ed6261
+
+This indicates a potential secondary attack vector prepared by the attacker.
+
+🧠 Skills Demonstrated
+
+Log analysis (Splunk)
+
+Endpoint monitoring (Sysmon)
+
+Brute-force detection
+
+IOC pivoting
+
+Threat Intelligence & OSINT investigation
+
+Cyber Kill Chain mapping
+
+Incident response analysis
