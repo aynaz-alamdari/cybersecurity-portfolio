@@ -98,11 +98,10 @@ index=botsv1 src=192.168.250.70 sourcetype=suricata dest_ip=23.22.63.114
 While reviewing the events related to this IP address, a suspicious image file was observed in the url field. To determine how this file was delivered to the server and whether it was involved in the defacement, additional searches were performed.
 
 The following query was used to identify traffic where the server was the destination and the suspicious file was requested:
-
+``` spl
 index=botsv1 url="/poisonivy-is-coming-for-you-batman.jpeg" dest_ip="192.168.250.70"
 | table _time src dest_ip http.hostname url
-
-
+```
 This search provided visibility into the source of the request and the associated hostname, allowing the file’s origin and delivery path to be traced. The results indicate that the image file was externally sourced and likely related to the website defacement activity.
 
 ![MaliciousPicture.png](images/MaliciousPicture.png)
