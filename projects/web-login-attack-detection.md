@@ -121,95 +121,170 @@ The objective of this step in the investigation was to identify the actual IP ad
 
 Using the intelligence gathered about the adversary, we conducted proactive threat hunting across multiple Threat Intelligence and OSINT platforms. By pivoting on known Indicators of Compromise (IOCs), such as IP addresses, domains, and file hashes, we identified malware samples and infrastructure linked to the threat actor.
 
-Overview
 
-In this investigation, I analyzed a simulated web defacement attack against imreallynotbatman.com and mapped the adversary’s activities across the Cyber Kill Chain framework. Using log analysis, Sysmon telemetry, and Threat Intelligence platforms, I reconstructed the attack lifecycle and identified the attacker’s infrastructure and associated malware.
 
-🔎 1. Reconnaissance
+--------------------------------------------------------------------------
 
-I identified reconnaissance activity targeting the web server.
+🛡️ Website Defacement – Root Cause Analysis
+1. Incident Summary
 
-Findings:
+A public-facing web server was reported as defaced and displaying unauthorized content.
+I conducted a full investigation to determine how the attacker gained access, identify indicators of compromise (IOCs), and establish the root cause of the compromise.
 
-IP 40.80.148.42 was actively scanning the server.
+2. Data Sources
 
-The attacker used Acunetix to perform vulnerability scanning and enumeration.
+HTTP access logs
 
-🚪 2. Exploitation
+Web server logs
 
-I analyzed authentication logs and detected a brute-force attack.
+Suricata IDS/IPS alerts
 
-Findings:
+Sysmon endpoint logs
 
-142 login attempts were made against the server.
+Splunk SIEM
 
-The attack originated from IP 23.22.63.114.
+Sourcetypes: http, web, stream:http, suricata, XmlWinEventLog
 
-IP 40.80.148.42 was used to successfully gain access.
+🔎 Investigation Timeline & Findings
+Phase 1 – Reconnaissance
 
-One authentication attempt resulted in compromise.
+The investigation began by searching for traffic related to imreallynotbatman.com, which the website had been redirected to.
 
-📦 3. Installation
+index=botsv1 imreallynotbatman.com
 
-I investigated post-compromise activity and identified payload deployment.
+I then identified the source IP responsible for reconnaissance activity.
 
-Findings:
+To validate the activity, I reviewed Suricata IDS alerts:
 
-Malicious executable 3791.exe was uploaded to the server.
+index="botsv1" sourcetype=suricata imreallynotbatman src_ip="40.80.148.xx"
 
-I analyzed Sysmon logs to retrieve the MD5 hash of the file.
+Findings
 
-The hash was used to pivot across Threat Intelligence platforms.
+IP 40.80.148.42 performed reconnaissance.
 
-🎯 4. Action on Objectives
+The attacker used Acunetix as a web vulnerability scanner.
 
-After gaining access, the attacker defaced the website.
+Phase 2 – Exploitation
 
-Findings:
+To determine if the attacker gained access, I analyzed inbound HTTP traffic.
 
-Log analysis revealed the file used to modify and deface the web server content.
+First, I reviewed source IP occurrence counts:
 
-🧩 5. Weaponization & Infrastructure Analysis
+Then, I examined inbound HTTP traffic to the web server:
 
-I pivoted on identified Indicators of Compromise (IOCs) using multiple Threat Intelligence and OSINT platforms.
+I analyzed HTTP methods to identify abnormal POST requests:
+
+To isolate suspicious POST requests:
+
+index=botsv1 sourcetype=stream:http dest_ip="192.168.250.xx" http_method=POST
+
+Since the backend application was identified as Joomla, I investigated traffic targeting the administrator login page:
+
+index=botsv1 "/joomla/administrator/index.php"
+
+Findings
+
+142 brute-force attempts were observed.
+
+IP 23.22.63.114 performed repeated password attempts.
+
+IP 40.80.148.42 successfully authenticated.
+
+The CMS in use was Joomla.
+
+This confirms successful brute-force compromise.
+
+Phase 3 – Installation
+
+After confirming unauthorized access, I investigated whether malicious files were uploaded.
+
+An executable file was identified:
+
+I then verified execution using Sysmon logs.
+
+Findings
+
+Malicious file 3791.exe was uploaded.
+
+Sysmon logs confirmed execution.
+
+The MD5 hash was extracted for threat intelligence pivoting.
+
+Phase 4 – Action on Objectives (Defacement)
+
+Since the server should not normally initiate outbound connections, I analyzed outbound Suricata logs:
+
+index=botsv1 src=192.168.250.70 sourcetype=suricata
+
+This revealed suspicious external communications.
+
+I further investigated traffic to IP 23.22.63.114:
+
+index=botsv1 src=192.168.250.70 sourcetype=suricata dest_ip=23.22.63.114
+
+A suspicious image file was identified:
+
+index=botsv1 url="/poisonivy-is-coming-for-you-batman.jpeg" dest_ip="192.168.250.70"
+| table _time src dest_ip http.hostname url
+
+Findings
+
+The file was externally sourced.
+
+The attacker used Dynamic DNS to mask infrastructure.
+
+The image was associated with the defacement.
+
+Phase 5 – Weaponization & Infrastructure Analysis
+
+I pivoted on the identified IOCs using Threat Intelligence platforms.
 
 Indicators Investigated:
 
 Domain: prankglassinebracket.jumpingcrab.com
 
-IP Address: 23.22.63.114
+IP: 23.22.63.114
 
-Findings:
+Findings
 
-Multiple masquerading domains were associated with the attacker’s infrastructure.
+Multiple masquerading domains were linked to the attacker.
 
 The email Lillian.rose@po1s0n1vy.com
- was linked to the adversary’s IP address.
+ was associated with the infrastructure.
 
-🚚 6. Delivery (Secondary Payload Discovery)
+DNS analysis revealed the true IP behind the attacker’s Dynamic DNS domain.
 
-I conducted further OSINT analysis and identified additional malware linked to the adversary.
+Phase 6 – Delivery (Secondary Payload Discovery)
 
-Findings:
+Using collected intelligence, I conducted additional threat hunting.
+
+Findings
 
 Malware identified: MirandaTateScreensaver.scr.exe
 
-MD5 Hash: c99131e0169171935c5ac32615ed6261
+MD5: c99131e0169171935c5ac32615ed6261
 
-This indicates a potential secondary attack vector prepared by the attacker.
+This indicates the attacker prepared a secondary payload.
 
 🧠 Skills Demonstrated
 
-Log analysis (Splunk)
+Splunk SIEM investigation
 
-Endpoint monitoring (Sysmon)
+Suricata IDS analysis
+
+Sysmon log analysis
 
 Brute-force detection
 
 IOC pivoting
 
-Threat Intelligence & OSINT investigation
+Threat Intelligence research
 
 Cyber Kill Chain mapping
 
-Incident response analysis
+Root cause analysis
+
+✅ Root Cause
+
+The compromise occurred due to a successful brute-force attack against the Joomla administrator login page.
+After authentication, the attacker uploaded and executed a malicious payload, communicated with external infrastructure using Dynamic DNS, and ultimately defaced the website.
