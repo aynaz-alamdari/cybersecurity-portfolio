@@ -107,7 +107,6 @@ This search provided visibility into the source of the request and the associate
 ![MaliciousPicture.png](images/MaliciousPicture.png)
 
 Before defacing the website, the attacker uploaded a malicious file to the server. During this process, the attacker used a Dynamic DNS service to mask the true source of the attack. Instead of communicating directly with a fixed IP address, the server resolved a domain name controlled by the attacker, which dynamically pointed to different IP addresses.
-
 ### Step 4: Weaponization Phase
 
 - Investigated potential indicators of compromise by analyzing suspicious IPs and domains.
