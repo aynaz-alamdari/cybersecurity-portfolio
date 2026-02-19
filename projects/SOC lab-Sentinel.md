@@ -57,7 +57,7 @@ This lab demonstrates how to:
    - Platform Type: `Windows`  
    - Subscription: Your Pay-As-You-Go  
    - Resource Group: Same as VM  
-   - Name: `SOC-DCR`  
+   - Name: `SOCDCR`  
 3. **Data Sources:** Add Windows Event Logs:  
    - Security  
    - System  
@@ -67,7 +67,7 @@ This lab demonstrates how to:
 6. Click **Review + Create → Create**
 
 **Screenshot Placeholder:**  
-`![Data Collection Rule](./screenshots/dcr_creation.png)`
+![DCR_Preview](images/DCR_Preview.png)
 
 ---
 
