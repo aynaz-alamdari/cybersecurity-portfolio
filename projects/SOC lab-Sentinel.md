@@ -91,6 +91,7 @@ SecurityEvent
 | sort by TimeGenerated desc
 | take 10
 ```
+
 ![log2](images/log2.png)
 
 
