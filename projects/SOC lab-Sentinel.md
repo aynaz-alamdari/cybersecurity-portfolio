@@ -104,7 +104,7 @@ SecurityEvent
 | where EventID == 4625
 | summarize FailedLogins=count() by Account, bin(TimeGenerated, 1h)
 | where FailedLogins >= 5
-
+```
 
 Severity: Medium
 
