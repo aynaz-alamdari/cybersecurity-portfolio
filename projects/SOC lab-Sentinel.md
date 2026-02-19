@@ -18,7 +18,7 @@ This lab demonstrates how to:
 |----------|------------|
 | Subscription | Pay-As-You-Go (Owner) |
 | Resource Group | SOC-Lab-RG |
-| VM | Windows Server 2022 |
+| VM | Windows Server 2016 |
 | Log Analytics Workspace | SOCLabWorkspace |
 | VM Identity | System-Assigned Managed Identity Enabled |
 
