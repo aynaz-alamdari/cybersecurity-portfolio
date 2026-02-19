@@ -81,19 +81,18 @@ Run queries in **Log Analytics Workspace → Logs** using KQL:
 Heartbeat
 | sort by TimeGenerated desc
 | take 10
+```
+![log1](images/log1.png)
 
 **Security Events**
-
-
 
 ```kusto
 SecurityEvent
 | sort by TimeGenerated desc
 | take 10
+```
+![log2](images/log2.png)
 
-
-Screenshot Placeholder:
-![log1](images/log1.png)
 
 ## 4️⃣ Create Analytic Rules (Alerts)
 Alert 1 – Multiple Failed Logins
