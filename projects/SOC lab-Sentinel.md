@@ -19,7 +19,7 @@ This lab demonstrates how to:
 | Subscription | Pay-As-You-Go (Owner) |
 | Resource Group | SOC-Lab-RG |
 | VM | Windows Server 2016 |
-| Log Analytics Workspace | SOCLabWorkspace |
+| Log Analytics Workspace | SOC-Lab-Workspace |
 | VM Identity | System-Assigned Managed Identity Enabled |
 
 **Screenshot Placeholder:**  
@@ -34,7 +34,7 @@ This lab demonstrates how to:
 2. Click **Save**  
 
 **Screenshot Placeholder:**  
-`![Enable Managed Identity](./screenshots/managed_identity.png)`
+![VM_Identity](images/VM_Identity.png)
 
 ---
 
