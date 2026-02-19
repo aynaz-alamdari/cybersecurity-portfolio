@@ -31,8 +31,19 @@ A Windows VM sends Security Event logs (Event ID 4625 – failed login) to a Log
 
 ---
 
-## Screenshot
-![Incident Example](./screenshots/incident.png)
+## Screenshots
+
+### Log Ingestion Verification
+![Log Ingestion](./images/log_ingestion.png)
+
+### Analytic Rule Setup
+![Analytic Rule](./images/analytic_rule.png)
+
+### Alert Trigger / Incident
+![Incident Trigger](./images/incident_trigger.png)
+
+### Sentinel Workbook / Dashboard
+![Dashboard](./images/dashboard.png)
 
 ---
 
