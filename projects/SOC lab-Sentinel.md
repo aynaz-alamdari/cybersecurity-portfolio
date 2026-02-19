@@ -23,7 +23,7 @@ This lab demonstrates how to:
 | VM Identity | System-Assigned Managed Identity Enabled |
 
 **Screenshot Placeholder:**  
-`![Lab_Setup](images/Lab_Setup.png)`
+![Lab_Setup](images/Lab_Setup.png)
 ---
 
 ## 2️⃣ Enable Log Collection
