@@ -85,6 +85,7 @@ Heartbeat
 **Security Events**
 
 
+
 ```kusto
 SecurityEvent
 | sort by TimeGenerated desc
