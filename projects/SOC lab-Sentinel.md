@@ -46,7 +46,7 @@ This lab demonstrates how to:
 4. Click **Review + Assign**
 
 **Screenshot Placeholder:**  
-`![Role Assignment](./screenshots/role_assignment.png)`
+`![Log_Analytics_ContributorRole](/images/Log_Analytics_ContributorRole.png)`
 
 ---
 
