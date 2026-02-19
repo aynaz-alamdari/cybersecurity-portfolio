@@ -1,199 +1,228 @@
-# SOC Lab – Microsoft Sentinel Setup
 
-## Lab Objective
+# 🛡️ Microsoft Sentinel – Brute Force Login Detection Lab
 
-This lab demonstrates how to:
+## 1️⃣ Introduction
 
-- Deploy a Windows VM in Azure  
-- Connect it to **Microsoft Sentinel** via **Log Analytics Workspace**  
-- Collect and verify real logs (Heartbeat, SecurityEvent)  
-- Create **KQL queries** and **alert rules**  
-- Set up **workbooks/dashboards** for SOC monitoring  
+This lab demonstrates end-to-end detection of brute-force login attempts using **Microsoft Sentinel**.  
+A Windows Virtual Machine (VM) generates Security Event logs (Event ID 4625 – Failed Login). Logs are collected by **Azure Monitor Agent (AMA)**, routed via a **Data Collection Rule (DCR)**, stored in a **Log Analytics Workspace**, and analyzed in Sentinel using **analytic rules**.
 
----
-
-## 1️⃣ Environment Setup
-
-| Resource | Name / Type |
-|----------|------------|
-| Subscription | Pay-As-You-Go (Owner) |
-| Resource Group | SOC-Lab-RG |
-| VM | Windows Server 2016 |
-| Log Analytics Workspace | SOC-Lab-Workspace |
-| VM Identity | System-Assigned Managed Identity Enabled |
-
-**Screenshot Placeholder:**  
-![Lab_Setup](images/Lab_Setup.png)
----
-
-## 2️⃣ Enable Log Collection
-
-### Step 1 – Enable Managed Identity
-
-1. Go to **Virtual Machine → Identity → System Assigned → On**  
-2. Click **Save**  
-
-**Screenshot Placeholder:**  
-![VM_Identity](images/VM_Identity.png)
+**Objective:**  
+Enable real-time detection of failed login attempts, simulate SOC monitoring, and map detection to the MITRE ATT&CK framework.
 
 ---
 
-### Step 2 – Assign Log Analytics Contributor Role
+## 2️⃣ Lab Architecture
 
-1. Go to **Log Analytics Workspace → Access control (IAM) → + Add → Add role assignment**  
-2. Role: **Log Analytics Contributor**  
-3. Assign access to: **Managed identity → Select your VM**  
-4. Click **Review + Assign**
+Windows Virtual Machine
+↓
+Windows Security Event Log
+↓
+Azure Monitor Agent (AMA)
+↓
+Data Collection Rule (DCR)
+↓
+Log Analytics Workspace
+↓
+Microsoft Sentinel
+↓
+Analytic Rule → Incident Creation
 
-**Screenshot Placeholder:**  
-![Log_Analytics_ContributorRole](images/Log_Analytics_ContributorRole.png)
 
----
+**Components Explained:**
 
-### Step 3 – Create Data Collection Rule (DCR)
-
-1. Search **Data Collection Rules → + Create**  
-2. **Basics:**  
-   - Platform Type: `Windows`  
-   - Subscription: Your Pay-As-You-Go  
-   - Resource Group: Same as VM  
-   - Name: `SOCDCR`  
-3. **Data Sources:** Add Windows Event Logs:  
-   - Security  
-   - System  
-   - Application  
-4. **Destination:** Your Log Analytics Workspace  
-5. **Resources:** Add your **VM**  
-6. Click **Review + Create → Create**
-
-**Screenshot Placeholder:**  
-![DCR_Preview](images/DCR_Preview.png)
+- **Windows VM:** Generates security events (failed login attempts)  
+- **AMA:** Collects and forwards logs from VM  
+- **DCR:** Configures which logs to collect and where to send them  
+- **Log Analytics Workspace:** Stores ingested telemetry  
+- **Microsoft Sentinel:** SIEM platform that detects suspicious activity and generates alerts  
 
 ---
 
-## 3️⃣ Verify Logs
+## 3️⃣ Implementation Steps
 
-Run queries in **Log Analytics Workspace → Logs** using KQL:
+### Step 1 — Deploy Azure Resources
 
-**Heartbeat Logs**
+- Create a **Resource Group** in Azure  
+- Deploy a **Windows Virtual Machine**  
+- Enable **RDP access** to test login events  
 
-```kusto
-Heartbeat
-| sort by TimeGenerated desc
-| take 10
-```
-![log1](images/log1.png)
+---
 
-**Security Events**
+### Step 2 — Create Log Analytics Workspace
 
-```kusto
-SecurityEvent
-| sort by TimeGenerated desc
-| take 10
-```
+- Create a **Log Analytics Workspace** in Azure  
+- Enable **Microsoft Sentinel** for the workspace  
 
-![log2](images/log2.png)
+> The workspace serves as the central repository for ingested logs.
 
+---
 
-## 4️⃣ Create Analytic Rules (Alerts)
-Alert 1 – Multiple Failed Logins
+### Step 3 — Install Azure Monitor Agent (AMA)
 
-Query:
+- Add **Azure Monitor Agent** via VM → Extensions  
+- Wait until **Provisioning State = Succeeded**
+
+**AMA Responsibilities:**  
+- Collect Windows Event Logs  
+- Send telemetry securely to Azure Monitor  
+- Forward logs to Log Analytics Workspace  
+
+Without AMA, Sentinel cannot see the events generated on the VM.
+
+---
+
+### Step 4 — Configure Data Collection Rule (DCR)
+
+- Navigate to **Azure Monitor → Data Collection Rules → Create**  
+- **Data Source:** Windows Event Logs → Security  
+- **Destination:** Log Analytics Workspace connected to Sentinel  
+- **Target:** Select your VM  
+
+**DCR Responsibilities:**  
+- Define which logs to collect  
+- Define where logs should be sent  
+- Enable centralized log collection
+
+Without a DCR, AMA does not know which events to forward.
+
+---
+
+### Step 5 — Generate Test Events
+
+- Create a **local test account** (e.g., `SOC-Test1`) on the VM  
+- Attempt **multiple failed RDP logins** (wrong password)  
+- Windows generates **Event ID 4625** for each failed login  
+
+---
+
+### Step 6 — Verify Log Ingestion
+
+Run the following Kusto Query in Log Analytics to confirm logs:
+
 ```kusto
 SecurityEvent
 | where EventID == 4625
-| summarize FailedLogins=count() by Account, bin(TimeGenerated, 1h)
-| where FailedLogins >= 5
+| sort by TimeGenerated desc
 ```
+
+✅ Logs should now appear, confirming AMA + DCR configuration is correct.
+
+## 4️⃣ Create Analytic Rules (Alerts)
+**Alert 1 — Multiple Failed Logins**
+
+```kusto
+Query:
+SecurityEvent
+| where EventID == 4625
+| summarize FailedAttempts = count() by Account, bin(TimeGenerated, 5m)
+| where FailedAttempts >= 5
+```
+Rule Configuration:
+
+Frequency: Every 5 minutes
+
+Lookup Period: 5 minutes
 
 Severity: Medium
 
-MITRE Tactic: Credential Access
+Incident Creation: Enabled
 
-Frequency: Run every 5 minutes
+This alert triggers when an account has multiple failed login attempts within 5 minutes.
 
-Lookback: Last 5 minutes
+**Alert 2 — High-Privilege Account Usage**
 
-Screenshot Placeholder:
-![Failed Logins Alert](./screenshots/alert_failed_logins.png)
-
-Alert 2 – High-Privilege Account Usage
-
+```kusto
 Query:
-
 SecurityEvent
 | where EventID in (4670, 4672)
-
-
+```
 Severity: High
 
 MITRE Tactic: Privilege Escalation
 
-Screenshot Placeholder:
-![High Privilege Alert](./screenshots/alert_high_privilege.png)
-
-Alert 3 – Service Stops/Starts
-
+**Alert 3 — Service Stops/Starts**
+```kusto
 Query:
-
 SecurityEvent
 | where EventID == 7036
 | summarize count() by EventData, bin(TimeGenerated, 1h)
-
-
+```
 Severity: Medium
 
 MITRE Tactic: Defense Evasion
 
-Screenshot Placeholder:
-![Service Alert](./screenshots/alert_service.png)
 
-## 5️⃣ Dashboard / Workbook Setup
+### Screenshots
+- Log Ingestion Verification ![Log Ingestion](./images/log_ingestion.png)
+- Analytic Rule Setup ![Analytic Rule](./images/analytic_rule.png)
+- Alert Trigger / Incident ![Incident Trigger](./images/incident_trigger.png)
+- Workbook / Dashboard ![Dashboard](./images/dashboard.png)
 
-Go to Microsoft Sentinel → Workbooks → + Create new workbook
 
-Add sections:
+## 5️⃣ Triggering Alerts (Testing)
 
-VM Heartbeat (Time chart)
+To test that your analytic rules are working in Microsoft Sentinel, perform the following steps:
 
-Top Failed Logins by Account (Bar chart)
+### 1. Failed Login Alert
+- On the VM, attempt to log in **with the wrong password 5 or more times** using the test account.  
+- This should trigger the **Multiple Failed Logins** alert (Event ID 4625).
 
-Privileged Account Activity (Table)
+### 2. High-Privilege Alert
+- Run a task as **Administrator** on the VM.  
+- This should trigger the **High-Privilege Account Usage** alert (Event IDs 4670, 4672).
 
-Service Events Over Time (Line chart)
+### 3. Service Alert
+- Stop and start a Windows service manually on the VM.  
+- This should trigger the **Service Stops/Starts** alert (Event ID 7036).
 
-Screenshot Placeholder:
-![Workbook Dashboard](./screenshots/workbook_dashboard.png)
+### 4. Verify Alerts
+- Go to **Microsoft Sentinel → Incidents**.  
+- Check that the alerts are generated and listed as incidents corresponding to your test actions.
 
-## 6️⃣ Triggering Alerts (For Lab Testing)
+## 6️⃣ MITRE ATT&CK Mapping
 
-Failed Login Alert: Log in to the VM with an incorrect password multiple times
+The following table maps the alerts created in Microsoft Sentinel to the corresponding MITRE ATT&CK tactics and techniques:
 
-High-Privilege Alert: Run a task as Administrator (EventID 4672)
-
-Service Alert: Stop/start a Windows service manually
-
-Check Microsoft Sentinel → Incidents to see alerts appear.
-
-Screenshot Placeholder:
-![Alert Trigger](./screenshots/alert_trigger.png)
+| Alert                       | Tactic                | Technique                 |
+|------------------------------|---------------------|---------------------------|
+| Multiple Failed Logins       | Credential Access    | T1110 – Brute Force       |
+| High-Privilege Account Usage | Privilege Escalation | N/A                       |
+| Service Stops/Starts         | Defense Evasion      | N/A                       |
 
 ## 7️⃣ Lessons Learned
 
-Modern Azure portal no longer shows old MMA agent menus
+Key takeaways from the lab:
 
-Workspace Keys are deprecated → use Managed Identity + DCR
+- Modern Azure portal no longer shows old **MMA agent menus**.  
+- **Workspace Keys are deprecated** → use **Managed Identity + DCR** instead.  
+- Third-party extensions do **not** send logs to Microsoft Sentinel.  
+- The **DCR approach** ensures secure, scalable log ingestion.  
+- **KQL queries and analytic rules** allow SOC teams to detect suspicious activity in near real-time.
 
-Third-party extensions (e.g., Xitoring) do not send logs to Sentinel
+## 8️⃣ Key Takeaways
 
-The DCR approach ensures secure, scalable log ingestion
+- **AMA:** Collects logs from VMs.  
+- **DCR:** Defines what logs to collect and where.  
+- **Log Analytics:** Stores logs.  
+- **Sentinel:** Detects threats and generates alerts.  
+- **Proper configuration** is essential for SOC operations.
 
-Using KQL queries and analytic rules, a SOC team can detect suspicious activity in near real-time
+## 9️⃣ Technologies Used
 
-## 8️⃣ References
+- **Microsoft Sentinel**  
+- **Azure Monitor Agent (AMA)**  
+- **Data Collection Rules (DCR)**  
+- **Log Analytics Workspace**  
+- **Kusto Query Language (KQL)**
 
-Microsoft Sentinel Documentation
+## 🔟 Future Improvements
 
-Azure Monitor Agent & Data Collection Rules
+- **Add IP-based filtering** to reduce false positives.  
+- **Implement alert enrichment** for more context in incidents.  
+- **Add automation playbooks** to respond automatically to alerts.  
+- **Tune thresholds** to reduce false positives.  
+- **Extend detection** to successful login anomalies (Event ID 4624).
 
-Kusto Query Language (KQL) Reference
+
+
+usto Query Language (KQL) Reference
