@@ -1,0 +1,84 @@
+# SOC Lab – Microsoft Sentinel Setup
+
+## Lab Objective
+
+This lab demonstrates how to:
+
+- Deploy a Windows VM in Azure  
+- Connect it to **Microsoft Sentinel** via **Log Analytics Workspace**  
+- Collect and verify real logs (Heartbeat, SecurityEvent)  
+- Create **KQL queries** and **alert rules**  
+- Set up **workbooks/dashboards** for SOC monitoring  
+
+---
+
+## 1️⃣ Environment Setup
+
+| Resource | Name / Type |
+|----------|------------|
+| Subscription | Pay-As-You-Go (Owner) |
+| Resource Group | SOC-Lab-RG |
+| VM | Windows Server 2022 |
+| Log Analytics Workspace | SOCLabWorkspace |
+| VM Identity | System-Assigned Managed Identity Enabled |
+
+**Screenshot Placeholder:**  
+`![VM and Workspace Overview](./screenshots/vm_workspace.png)`
+
+---
+
+## 2️⃣ Enable Log Collection
+
+### Step 1 – Enable Managed Identity
+
+1. Go to **Virtual Machine → Identity → System Assigned → On**  
+2. Click **Save**  
+
+**Screenshot Placeholder:**  
+`![Enable Managed Identity](./screenshots/managed_identity.png)`
+
+---
+
+### Step 2 – Assign Log Analytics Contributor Role
+
+1. Go to **Log Analytics Workspace → Access control (IAM) → + Add → Add role assignment**  
+2. Role: **Log Analytics Contributor**  
+3. Assign access to: **Managed identity → Select your VM**  
+4. Click **Review + Assign**
+
+**Screenshot Placeholder:**  
+`![Role Assignment](./screenshots/role_assignment.png)`
+
+---
+
+### Step 3 – Create Data Collection Rule (DCR)
+
+1. Search **Data Collection Rules → + Create**  
+2. **Basics:**  
+   - Platform Type: `Windows`  
+   - Subscription: Your Pay-As-You-Go  
+   - Resource Group: Same as VM  
+   - Name: `SOC-DCR`  
+3. **Data Sources:** Add Windows Event Logs:  
+   - Security  
+   - System  
+   - Application  
+4. **Destination:** Your Log Analytics Workspace  
+5. **Resources:** Add your **VM**  
+6. Click **Review + Create → Create**
+
+**Screenshot Placeholder:**  
+`![Data Collection Rule](./screenshots/dcr_creation.png)`
+
+---
+
+## 3️⃣ Verify Logs
+
+Run queries in **Log Analytics Workspace → Logs** using KQL:
+
+**Heartbeat Logs**
+
+```kusto
+Heartbeat
+| sort by TimeGenerated desc
+| take 10
