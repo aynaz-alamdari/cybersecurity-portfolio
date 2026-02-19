@@ -82,15 +82,17 @@ Heartbeat
 | sort by TimeGenerated desc
 | take 10
 
-Security Events
+**Security Events**
 
+
+```kusto
 SecurityEvent
 | sort by TimeGenerated desc
 | take 10
 
 
 Screenshot Placeholder:
-![Log Verification](./screenshots/log_verification.png)
+![log1](images/log1.png)
 
 ## 4️⃣ Create Analytic Rules (Alerts)
 Alert 1 – Multiple Failed Logins
