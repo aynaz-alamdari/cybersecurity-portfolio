@@ -171,7 +171,7 @@ SecurityEvent
 ```
 - **Severity:** Medium
 - **MITRE Tactic:** Defense Evasion
-
+![SErviceChange_Logs](images/SErviceChange_Logs.png)
 
 ### Screenshots
 - Log Ingestion Verification ![Log Ingestion](./images/log_ingestion.png)
