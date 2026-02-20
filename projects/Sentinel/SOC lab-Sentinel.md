@@ -56,6 +56,7 @@ Analytic Rule → Incident Creation
 
 > The workspace serves as the central repository for ingested logs.
 
+![LogAnalyticsWorkspace](images/LogAnalyticsWorkspace.png)
 ---
 
 ### Step 3 — Install Azure Monitor Agent (AMA)
