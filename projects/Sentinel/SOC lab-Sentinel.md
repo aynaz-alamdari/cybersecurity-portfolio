@@ -108,48 +108,46 @@ SecurityEvent
 ✅ Logs should now appear, confirming AMA + DCR configuration is correct.
 
 ## 4️⃣ Create Analytic Rules (Alerts)
-**Alert 1 — Multiple Failed Logins**
+
+### 🔹 Alert 1 — Multiple Failed Logins
+
+**Query:**
 
 ```kusto
-Query:
 SecurityEvent
 | where EventID == 4625
 | summarize FailedAttempts = count() by Account, bin(TimeGenerated, 5m)
 | where FailedAttempts >= 5
 ```
-Rule Configuration:
+**Rule Configuration:**
 
-Frequency: Every 5 minutes
+- **Frequency:** Every 5 minutes  
+- **Lookup Period:** 5 minutes  
+- **Severity:** Medium  
+- **Incident Creation:** Enabled  
 
-Lookup Period: 5 minutes
+This alert triggers when an account has multiple failed login attempts within a 5-minute window.
 
-Severity: Medium
+### 🔹 Alert 2 — High-Privilege Account Usage
 
-Incident Creation: Enabled
-
-This alert triggers when an account has multiple failed login attempts within 5 minutes.
-
-**Alert 2 — High-Privilege Account Usage**
-
+**Query:**
 ```kusto
-Query:
 SecurityEvent
 | where EventID in (4670, 4672)
 ```
-Severity: High
+- **Severity:** High  
+- **MITRE Tactic:** Privilege Escalation  
 
-MITRE Tactic: Privilege Escalation
+### 🔹 Alert 3 — Service Stops/Starts
 
-**Alert 3 — Service Stops/Starts**
+**Query:**
 ```kusto
-Query:
 SecurityEvent
 | where EventID == 7036
 | summarize count() by EventData, bin(TimeGenerated, 1h)
 ```
-Severity: Medium
-
-MITRE Tactic: Defense Evasion
+- **Severity:** Medium
+- **MITRE Tactic:** Defense Evasion
 
 
 ### Screenshots
