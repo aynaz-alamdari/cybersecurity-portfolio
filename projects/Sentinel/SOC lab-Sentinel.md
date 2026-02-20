@@ -173,32 +173,59 @@ SecurityEvent
 - **MITRE Tactic:** Defense Evasion
 ![SErviceChange_Logs](images/SErviceChange_Logs.png)
 
-### Screenshots
-- Log Ingestion Verification ![Log Ingestion](./images/log_ingestion.png)
-- Analytic Rule Setup ![Analytic Rule](./images/analytic_rule.png)
-- Alert Trigger / Incident ![Incident Trigger](./images/incident_trigger.png)
-- Workbook / Dashboard ![Dashboard](./images/dashboard.png)
+## 5️⃣ Triggering Alerts (Detection Validation & Testing)
 
+To validate that the configured analytic rules were functioning correctly, controlled test activity was performed on the virtual machine. Each action was designed to generate specific Windows Event IDs and confirm successful detection in Microsoft Sentinel.
 
-## 5️⃣ Triggering Alerts (Testing)
+---
 
-To test that your analytic rules are working in Microsoft Sentinel, perform the following steps:
+### 🔹 1. Multiple Failed Login Detection (Event ID 4625)
 
-### 1. Failed Login Alert
-- On the VM, attempt to log in **with the wrong password 5 or more times** using the test account.  
-- This should trigger the **Multiple Failed Logins** alert (Event ID 4625).
+- Attempted to log in to the VM using an incorrect password 5+ times with a test account.
+- This generated multiple **Event ID 4625 (Failed Logon)** entries in the Security log.
+- The analytic rule detected the threshold breach within the configured 5-minute window.
+- A corresponding **Medium severity incident** was successfully created in Microsoft Sentinel.
 
-### 2. High-Privilege Alert
-- Run a task as **Administrator** on the VM.  
-- This should trigger the **High-Privilege Account Usage** alert (Event IDs 4670, 4672).
+✅ Detection logic and threshold configuration were validated.
 
-### 3. Service Alert
-- Stop and start a Windows service manually on the VM.  
-- This should trigger the **Service Stops/Starts** alert (Event ID 7036).
+---
 
-### 4. Verify Alerts
-- Go to **Microsoft Sentinel → Incidents**.  
-- Check that the alerts are generated and listed as incidents corresponding to your test actions.
+### 🔹 2. High-Privilege Account Usage Detection (Event IDs 4670, 4672)
+
+- Logged into the VM using an Administrator account.
+- This generated **Event ID 4672 (Special privileges assigned to new logon)**.
+- The analytic rule identified privileged account activity.
+- A **High severity incident** was generated in Microsoft Sentinel.
+
+✅ Privileged account monitoring and alert mapping to MITRE ATT&CK were validated.
+
+---
+
+### 🔹 3. Service State Change Detection (Event ID 7036)
+
+- Manually stopped and restarted a Windows service (Print Spooler) inside the VM.
+- This generated **Event ID 7036 (Service state change)** in the System log.
+- The analytic rule detected the service stop/start activity.
+- A **Medium severity incident** was created in Microsoft Sentinel.
+
+✅ Service monitoring detection was successfully validated.
+
+---
+
+### 🔹 4. Incident Verification
+
+- Navigated to **Microsoft Sentinel → Incidents**.
+- Confirmed that each simulated activity generated a corresponding alert and incident.
+- Verified timestamps, host information, and rule association for accuracy.
+
+This testing process confirmed:
+
+- Proper log ingestion via AMA and DCR  
+- Correct event parsing in Log Analytics  
+- Functional analytic rule logic  
+- Successful incident generation in Microsoft Sentinel  
+
+The end-to-end detection pipeline was fully validated.
 
 ## 6️⃣ MITRE ATT&CK Mapping
 
