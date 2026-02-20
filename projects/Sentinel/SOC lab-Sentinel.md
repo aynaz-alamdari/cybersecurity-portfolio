@@ -148,6 +148,8 @@ SecurityEvent
 
 This alert triggers when an account has multiple failed login attempts within a 5-minute window.
 
+![Multiple_FailedLogins](images/Multiple_FailedLogins.png)
+
 ### 🔹 Alert 2 — High-Privilege Account Usage
 
 **Query:**
