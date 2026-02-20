@@ -160,6 +160,8 @@ SecurityEvent
 - **Severity:** High  
 - **MITRE Tactic:** Privilege Escalation  
 
+![HighPrivilege_Logins](images/HighPrivilege_Logins.png)
+
 ### 🔹 Alert 3 — Service Stops/Starts
 
 **Query:**
