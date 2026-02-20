@@ -111,6 +111,7 @@ Without a DCR, AMA does not know which events to forward.
 - Attempt **multiple failed RDP logins** (wrong password)  
 - Windows generates **Event ID 4625** for each failed login  
 
+![VM_Failedlogins](images/VM_Failedlogins.png)
 ---
 
 ### Step 6 — Verify Log Ingestion
