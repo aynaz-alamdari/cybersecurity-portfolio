@@ -46,6 +46,7 @@ Analytic Rule → Incident Creation
 - Deploy a **Windows Virtual Machine**  
 - Enable **RDP access** to test login events  
 
+![Lab_Setup](images/Lab_Setup.png)
 ---
 
 ### Step 2 — Create Log Analytics Workspace
