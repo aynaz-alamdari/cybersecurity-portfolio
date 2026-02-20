@@ -70,7 +70,7 @@ Analytic Rule → Incident Creation
 - Forward logs to Log Analytics Workspace  
 
 Without AMA, Sentinel cannot see the events generated on the VM.
-
+![AMA](images/AMA.png)
 ---
 
 ### Step 4 — Configure Data Collection Rule (DCR)
