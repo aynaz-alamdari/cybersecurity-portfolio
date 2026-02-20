@@ -221,6 +221,19 @@ Key takeaways from the lab:
 - **Tune thresholds** to reduce false positives.  
 - **Extend detection** to successful login anomalies (Event ID 4624).
 
+## 📚 References
 
+- Microsoft. *Microsoft Sentinel Documentation*.  
+  https://learn.microsoft.com/azure/sentinel/
 
-usto Query Language (KQL) Reference
+- Microsoft. *Azure Monitor Agent Overview*.  
+  https://learn.microsoft.com/azure/azure-monitor/agents/azure-monitor-agent-overview
+
+- Microsoft. *Data Collection Rules (DCR) Documentation*.  
+  https://learn.microsoft.com/azure/azure-monitor/essentials/data-collection-rule-overview
+
+- Microsoft. *Log Analytics and Kusto Query Language (KQL)*.  
+  https://learn.microsoft.com/azure/data-explorer/kusto/query/
+
+- MITRE. *MITRE ATT&CK Framework*.  
+  https://attack.mitre.org/
