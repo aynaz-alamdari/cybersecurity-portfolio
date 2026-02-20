@@ -239,13 +239,12 @@ The following table maps the alerts created in Microsoft Sentinel to the corresp
 
 ## 7️⃣ Lessons Learned
 
-Key takeaways from the lab:
-
-- Modern Azure portal no longer shows old **MMA agent menus**.  
-- **Workspace Keys are deprecated** → use **Managed Identity + DCR** instead.  
-- Third-party extensions do **not** send logs to Microsoft Sentinel.  
-- The **DCR approach** ensures secure, scalable log ingestion.  
-- **KQL queries and analytic rules** allow SOC teams to detect suspicious activity in near real-time.
+- **Azure Monitor Agent (AMA) + Data Collection Rules (DCR) are essential:** Modern log collection requires AMA and DCR; legacy MMA and workspace keys are deprecated.  
+- **End-to-end testing is critical:** Logs must be generated, ingested, and verified to ensure analytic rules trigger correctly.  
+- **Kusto Query Language (KQL) is a SOC analyst’s core tool:** Allows precise filtering, summarization, and correlation of telemetry for alerting.  
+- **Alert tuning impacts incident creation:** Defender XDR may suppress low- or medium-severity alerts; understanding tuning is essential to validate detections.  
+- **Controlled lab simulations validate detection logic:** Generating failed logins, privileged activity, or service changes demonstrates that alerts and incidents work as expected.  
+- **Proper rule configuration prevents missed alerts:** Incorrect thresholds, table references, or frequency settings can stop incidents from being created, even if logs exist.
 
 ## 8️⃣ Key Takeaways
 
