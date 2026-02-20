@@ -247,7 +247,7 @@ In this lab exercise, as a SOC Analyst, we investigated a cyber-attack in which 
 - Monitor outbound connections from web servers for unusual traffic.  
 - Implement web application firewalls (WAF) and IDS/IPS rules to block known malicious IPs.  
 - Perform regular malware scans and review file integrity.
-- 
+  
 ## References
 
 - TryHackMe Lab: "Website Defacement – Root Cause Analysis"  
