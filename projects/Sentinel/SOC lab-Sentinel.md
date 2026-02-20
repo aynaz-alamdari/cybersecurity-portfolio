@@ -123,8 +123,9 @@ SecurityEvent
 | where EventID == 4625
 | sort by TimeGenerated desc
 ```
-
 ✅ Logs should now appear, confirming AMA + DCR configuration is correct.
+
+![Failedlogin_testuser](images/Failedlogin_testuser.png)
 
 ## 4️⃣ Create Analytic Rules (Alerts)
 
