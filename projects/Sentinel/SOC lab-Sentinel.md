@@ -80,6 +80,22 @@ Without AMA, Sentinel cannot see the events generated on the VM.
 - **Destination:** Log Analytics Workspace connected to Sentinel  
 - **Target:** Select your VM  
 
+<table>
+  <tr>
+    <td align="center">
+      <img src="images/DCR1.png" width="400"/>
+      <br/>
+      <em>Log Ingestion</em>
+    </td>
+    <td align="center">
+      <img src="images/DCR_Destination.png" width="400"/>
+      <br/>
+      <em>Incident Triggered</em>
+    </td>
+  </tr>
+</table>
+
+
 **DCR Responsibilities:**  
 - Define which logs to collect  
 - Define where logs should be sent  
