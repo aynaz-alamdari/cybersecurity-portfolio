@@ -249,11 +249,11 @@ Key takeaways from the lab:
 
 ## 8️⃣ Key Takeaways
 
-- **AMA:** Collects logs from VMs.  
-- **DCR:** Defines what logs to collect and where.  
-- **Log Analytics:** Stores logs.  
-- **Sentinel:** Detects threats and generates alerts.  
-- **Proper configuration** is essential for SOC operations.
+- **Azure Monitor Agent (AMA):** Efficiently collects telemetry and security logs from Windows VMs, providing the foundation for monitoring and detection.  
+- **Data Collection Rules (DCR):** Precisely define which logs are collected and where they are sent, ensuring structured, scalable, and secure log ingestion.  
+- **Log Analytics Workspace:** Centralized storage for all collected logs, enabling fast querying and correlation for analysis.  
+- **Microsoft Sentinel:** Provides real-time threat detection, alerting, and incident management based on ingested logs and analytic rules.  
+- **SOC Best Practices:** Proper configuration and end-to-end validation of log collection, detection rules, and alert handling is critical for effective security operations and accurate incident response.
 
 ## 9️⃣ Technologies Used
 
@@ -265,11 +265,12 @@ Key takeaways from the lab:
 
 ## 🔟 Future Improvements
 
-- **Add IP-based filtering** to reduce false positives.  
-- **Implement alert enrichment** for more context in incidents.  
-- **Add automation playbooks** to respond automatically to alerts.  
-- **Tune thresholds** to reduce false positives.  
-- **Extend detection** to successful login anomalies (Event ID 4624).
+- **Enhance alert enrichment:** Add contextual information such as user identity, device, geolocation, and threat intelligence to incidents for faster SOC investigation and prioritization.  
+- **Integrate automation playbooks:** Automatically respond to high-confidence alerts, e.g., disable compromised accounts, isolate affected devices, or notify analysts to accelerate response.  
+- **Refine analytic rule thresholds:** Adjust thresholds and conditions to balance detection sensitivity with alert fidelity, minimizing false positives without missing real attacks.  
+- **Expand detection coverage:** Monitor anomalous successful logins (Event ID 4624) and other suspicious behaviors to detect early signs of compromise.  
+- **Include lab-only IP-based filtering:** For lab testing, filtering known test VM IPs can reduce noise. In production Zero Trust environments, rely on identity, device, and risk signals instead of static IPs.  
+- **Implement alert correlation across rules:** Combine related alerts (e.g., multiple failed logins followed by a successful login) to generate higher-fidelity incidents for more effective SOC triage.  
 
 ## 📚 References
 
