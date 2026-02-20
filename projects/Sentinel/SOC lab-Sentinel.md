@@ -85,12 +85,12 @@ Without AMA, Sentinel cannot see the events generated on the VM.
     <td align="center">
       <img src="images/DCR1.png" width="400"/>
       <br/>
-      <em>Log Ingestion</em>
+      <em>Data Colection Rule - Basic</em>
     </td>
     <td align="center">
       <img src="images/DCR_Destination.png" width="400"/>
       <br/>
-      <em>Incident Triggered</em>
+      <em>Data Colection Rule - Destination</em>
     </td>
   </tr>
 </table>
