@@ -2,7 +2,7 @@
 
 ## Overview
 This project demonstrates detection of brute-force login attempts using Microsoft Sentinel.  
-A Windows VM sends Security Event logs (Event ID 4625 – failed login) to a Log Analytics Workspace via **Azure Monitor Agent (AMA)** and **Data Collection Rules (DCR)**. Sentinel then generates alerts based on multiple failed login attempts.
+A Windows VM sends Security Event logs (Event ID 4625 – failed login) to a Log Analytics Workspace via **Azure Monitor Agent (AMA)** and **Data Collection Rules (DCR)**. Sentinel then generates alerts based on multiple failed login attempts and visualizes logon activity using **Workbooks**.
 
 ---
 
@@ -11,8 +11,9 @@ A Windows VM sends Security Event logs (Event ID 4625 – failed login) to a Log
 2. Install Azure Monitor Agent (AMA)  
 3. Configure Data Collection Rule (DCR) to collect Security Event logs  
 4. Verify log ingestion in Log Analytics Workspace  
-5. Create an analytic rule in Sentinel to alert on multiple failed logins  
+5. Create analytic rules in Sentinel to alert on multiple failed logins  
 6. Test detection by performing failed RDP login attempts  
+7. Create **Sentinel Workbooks** for visualizing failed and successful logons
 
 ---
 
@@ -34,18 +35,13 @@ A Windows VM sends Security Event logs (Event ID 4625 – failed login) to a Log
 ## Screenshots
 
 ### Log Ingestion Verification
-![Log Ingestion](./images/log_ingestion.png)
+![Log Ingestion](images/Log1.png)
 
 ### Analytic Rule Setup
-![Analytic Rule](./images/analytic_rule.png)
+![Analytic Rule](images/Azure_Workbook.png)
 
 ### Alert Trigger / Incident
-![Incident Trigger](./images/incident_trigger.png)
+![Incident Trigger](images/incident_trigger.png)
 
 ### Sentinel Workbook / Dashboard
-![Dashboard](./images/dashboard.png)
-
----
-
-## Key Takeaway
-Proper configuration of AMA + DCR enables Windows Security events to be ingested into Sentinel, allowing SOC teams to detect and respond to suspicious activity.
+![Dashboard](images/Azure_Workbook.png)
