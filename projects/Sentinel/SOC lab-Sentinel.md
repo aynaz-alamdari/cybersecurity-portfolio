@@ -294,8 +294,21 @@ To enhance visualization and make logon monitoring more actionable, a **Workbook
 - Quickly identifies suspicious accounts, repeated failures, or unusual login patterns.  
 - Enhances SOC analysts’ ability to triage alerts and investigate incidents efficiently.
 
-**Screenshot Placeholder:**  
-![Defender_Workbook](images/Defender_Workbook.png)
+<table>
+  <tr>
+    <td align="center">
+      <img src="images/Defender_Workbook.png" width="400"/>
+      <br/>
+      <em>Data Colection Rule - Basic</em>
+    </td>
+    <td align="center">
+      <img src="images/Azure_Workbook" width="400"/>
+      <br/>
+      <em>Data Colection Rule - Destination</em>
+    </td>
+  </tr>
+</table>
+
 
 ## 📚 References
 
