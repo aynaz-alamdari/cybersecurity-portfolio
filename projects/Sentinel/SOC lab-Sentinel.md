@@ -271,6 +271,32 @@ The following table maps the alerts created in Microsoft Sentinel to the corresp
 - **Include lab-only IP-based filtering:** For lab testing, filtering known test VM IPs can reduce noise. In production Zero Trust environments, rely on identity, device, and risk signals instead of static IPs.  
 - **Implement alert correlation across rules:** Combine related alerts (e.g., multiple failed logins followed by a successful login) to generate higher-fidelity incidents for more effective SOC triage.  
 
+## 1️⃣1️⃣ Workbook Dashboards in Sentinel
+
+To enhance visualization and make logon monitoring more actionable, a **Workbook** was created in Microsoft Sentinel, building on the detection pipeline established in this lab.
+
+**Steps Taken:**  
+1. In the **Azure portal**, navigate to **Microsoft Sentinel**.  
+2. Select the **Log Analytics Workspace** connected to your VM logs.  
+3. Click on **Workbooks**. You will be redirected to the Defender portal.  
+4. In Defender, click **Add Workbook → New Workbook**.  
+5. Add queries for:
+   - **Failed logons (Event ID 4625)**  
+   - **Successful logons (Event ID 4624)**  
+6. Choose visualizations:
+   - **Bar chart** for failed logons per user/IP  
+   - **Time chart** for successful logons over the last 24 hours  
+7. Add **titles, axis labels, and legends** for clarity and readability.  
+8. Save the workbook for continuous monitoring and SOC analysis.
+
+**Results / Insights:**  
+- Provides a clear, visual representation of logon activity trends.  
+- Quickly identifies suspicious accounts, repeated failures, or unusual login patterns.  
+- Enhances SOC analysts’ ability to triage alerts and investigate incidents efficiently.
+
+**Screenshot Placeholder:**  
+![Defender_Workbook](images/Defender_Workbook.png)
+
 ## 📚 References
 
 - Microsoft. *Microsoft Sentinel Documentation*.  
