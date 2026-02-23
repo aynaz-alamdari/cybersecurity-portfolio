@@ -295,7 +295,7 @@ To enhance visualization and make logon monitoring more actionable, a **Workbook
 - Enhances SOC analysts’ ability to triage alerts and investigate incidents efficiently.
 
 **Screenshot Placeholder:**  
-![Workbook Dashboard](images/Workbook_Dashboard.png)
+![Defender_Workbook](images/Defender_Workbook.png)
 
 ## 📚 References
 
