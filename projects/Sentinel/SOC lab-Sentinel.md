@@ -297,14 +297,19 @@ To enhance visualization and make logon monitoring more actionable, a **Workbook
 <table>
   <tr>
     <td align="center">
-      <img src="images/Defender_Workbook.png" width="400"/>
+      <img src="images/Defender_Workbook_Edit.png" width="400"/>
       <br/>
-      <em>Data Colection Rule - Basic</em>
+      <em>Defender Workbook Editing</em>
     </td>
     <td align="center">
-      <img src="images/Azure_Workbook" width="400"/>
+      <img src="images/Defender_Workbook.png" width="400"/>
       <br/>
-      <em>Data Colection Rule - Destination</em>
+      <em>Defender Workbook Dashboardc</em>
+    </td>
+    <td align="center">
+      <img src="images/Azure_Workbook.png" width="400"/>
+      <br/>
+      <em>Azure Workbook Dashboard</em>
     </td>
   </tr>
 </table>
