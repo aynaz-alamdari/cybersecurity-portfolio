@@ -30,18 +30,4 @@ A Windows VM sends Security Event logs (Event ID 4625 – failed login) to a Log
 - **Tactic:** Credential Access  
 - **Technique:** T1110 – Brute Force  
 
----
 
-## Screenshots
-
-### Log Ingestion Verification
-![Log Ingestion](images/Log1.png)
-
-### Analytic Rule Setup
-![Analytic Rule](images/Azure_Workbook.png)
-
-### Alert Trigger / Incident
-![Incident Trigger](images/incident_trigger.png)
-
-### Sentinel Workbook / Dashboard
-![Dashboard](images/Azure_Workbook.png)
